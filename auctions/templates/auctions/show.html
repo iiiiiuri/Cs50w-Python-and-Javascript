@@ -1,0 +1,217 @@
+{% extends 'auctions/header.html' %}
+{% block body %}
+  <section class="text-gray-600 body-font overflow-hidden h-22">
+    <div class="container px-5 py-5 mt-3 mx-auto bg-white shadow-lg border-2 rounded-md w-full ">
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            <div class="mb-3 flex items-center bg-green-200 text-green-900 text-sm font-bold p-3 border-2 border-green-900 rounded-md" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg"  fill="green" class="bi bi-check w-10" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+              </svg>
+              <p>Congratulations {{ item.last_bid.bidder|capfirst }} , your bid was completed successfully</p>
+            </div>
+          {% elif message.tags == 'error' %}
+            <div class="mb-3 items-center bg-red-200 text-red-900 text-sm font-bold p-3 border-2 border-red-900 rounded-md w-auto" role="alert">
+              <div class="flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="red" class="bi bi-check w-6 mr-1" viewBox="0 0 16 16">
+                  <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A4.979 4.979 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A4.985 4.985 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623zM4 7v4a4 4 0 0 0 3.5 3.97V7zm4.5 0v7.97A4 4 0 0 0 12 11V7zM12 6a3.989 3.989 0 0 0-1.334-2.982A3.983 3.983 0 0 0 8 2a3.983 3.983 0 0 0-2.667 1.018A3.989 3.989 0 0 0 4 6z"/>
+                </svg>
+                <p class="my-auto">An error occurred while placing your bid, please be aware of the following:</p>
+              </div>
+              <div class="flex">
+                <ul class="list-disc list-inside m-3">
+                  <li>Your bid must be greater than the initial amount and the current bid amount.</li>
+                  <li>Your bid must be higher than the current bid.</li>
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        {% if item.image %}
+          <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 max-h-[600px] object-contain rounded-md" src="{{ item.image }}" />
+        {% else %}
+          <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 max-h-[600px] object-contain rounded-md" src="https://dummyimage.com/600x400/878787/000000.png&text=Image+not+found" />
+        {% endif %}
+
+
+        {% if item.active == False %}
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+          {% if item.category %}
+          <span class="shadow-md bg-gray-300 text-gray-500 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ item.category | capfirst }}</span>
+          {% else %}
+          <span class="shadow-md bg-red-300 text-red-900 text-xs font-medium px-2.5 py-0.5 rounded-full">Not Listed</span>
+          {% endif %}
+          <span class="shadow-md bg-red-300 text-red-900 text-xs font-medium px-2.5 py-0.5 rounded-full">Closed</span>
+        {% else %}
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+          {% if item.category %}
+          <span class="shadow-md bg-gray-300 text-gray-500 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ item.category | capfirst }}</span>
+          {% else %}
+          <span class="shadow-md bg-red-300 text-red-900 text-xs font-medium px-2.5 py-0.5 rounded-full">Not Listed</span>
+          {% endif %}
+          <span class="shadow-md bg-green-300 text-green-900 text-xs font-medium px-2.5 py-0.5 rounded-full">Opened</span>
+
+          {% endif %}
+          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ item.title | capfirst}}</h1>
+
+          <p class="leading-relaxed">{{ item.description | capfirst }}</p>
+
+          
+          {% if item.last_bid.bidder != Null %}
+          <div class="mt-3 flex gap-2">
+            <span class="shadow-md bg-emerald-300 text-emerald-900 text-md font-medium px-2.5 py-0.5  rounded-full"> Owner: {{ item.owner | capfirst }}</span>
+            <span class="shadow-md bg-blue-300 text-blue-900 text-md font-medium px-2.5 py-0.5  rounded-full"> Last Bidder: {{ item.last_bid.bidder | capfirst }}</span>
+         </div>
+          {% else %}
+            <div class="mt-3 flex">
+              <span class="shadow-md bg-yellow-300 text-yellow-800 text-md font-medium px-2.5 py-0.5  rounded-full">Owner: {{ item.owner | capfirst }}</span>
+            </div>
+          {% endif %}
+
+          <hr class="h-px my-8 bg-gray-200 border-0">
+          <div class="w-full">
+            <label class="title-font font-medium text-2xl text-gray-900">
+              Initial Price :
+              <span class="text-green-900">R$ {{ item.starting_price }}</span>
+            </label>
+          </div>
+          <div class="w-full">
+            <label class="title-font font-medium text-2xl text-gray-900">
+              Current Bid:
+              {% if item.current_price is Null %}
+              <span class="text-red-900">No bids yet</span>
+              {% else %}
+              <span class="text-green-900">R$ {{ item.current_price }}</span>
+              {% endif %}
+            </label>
+          </div>
+
+
+        {% if user.is_authenticated %}
+
+            {% if item.active %}
+
+                {% if item.owner == user %}
+                     <form action="{% url 'closeAuction' id=item.id %}" method="post" class="inline-block">
+                       {% csrf_token %}
+                       <button type="submit" class="mt-10 cursor-pointer inline-block bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-all delay-10">Close Auction</button>
+                     </form>
+                   {% else %}
+                     <div class="flex mt-6 w-full">
+                       <form action="{% url 'doBid' id=item.id %}" method="POST">
+                         {% csrf_token %}
+                         <input class="rounded border-2 border-blue-400 focus:outline-none p-2" type="number" name="newBid" required/>
+                         <button class="text-white bg-[#2E738B] border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded transition-all delay-10 shadow-md">Bid</button>
+                       </form>
+                       {% if favorito %}
+                         <form action="{% url 'removeWatchList' id=item.id %}" method="POST">
+                           {% csrf_token %}
+                           <button type="submit" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill w-5 h-5" viewBox="0 0 16 16">
+                               <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                             </svg>
+                           </button>
+                         </form>  
+                       {% else %}
+                         <form action="{% url 'addWatchList' id=item.id%}" method="POST">
+                           {% csrf_token %}
+                           <button type="submit" class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart w-5 h-5" viewBox="0 0 16 16">
+                               <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                             </svg>
+                           </button>
+                         </form>  
+                       {% endif %}
+                     </div>
+                   {% endif %}
+            {% else %}
+                   <div class="mt-10">
+                   <span class="mt-10 title-font font-medium text-2xl text-gray-900">This auction is closed by <span class="text-blue-900">{{item.owner | capfirst}}</span>
+                   
+                   
+                   {% if item.winner == user %}
+                   <span class="flex bg-emerald-900 text-white text-md font-medium my-auto p-2 rounded-md mt-4 w-32">You Win
+                   <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-4" fill="yellow" class="bi bi-trophy-fill" viewBox="0 0 16 16">
+                     <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935"/>
+                   </svg>
+                 </span>
+                 {% endif %}
+                  </div>
+
+            {% endif %}
+
+        {% else %}
+               <span class="title-font font-medium text-2xl text-gray-900">
+                 <a class="text-indigo-800 hover:text-red-500" href="{% url 'register' %}">Create your account</a>
+                 or
+                 <a class="text-indigo-800 hover:text-red-500" href="{% url 'login' %}">login</a>
+                 to bid!
+               </span>
+        {% endif %}
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+        
+          </section>
+
+
+
+
+          <section class="bg-white">
+            <div class="max-w-2xl mx-auto px-4">
+                <div class="flex justify-between items-center mb-6">
+                  {% if comments.count == 0 %}
+                  <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">This auction don't have comment</h2>
+                  {% else %}
+                  <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">Discussion ({{ comments.count }})</h2>
+                  {% endif %}
+              </div>
+
+              {% if user.is_authenticated %}
+              <form class="mb-3" action="{%url 'comment' id=item.id%}" method="POST">
+                {%csrf_token %}
+                  <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 shadow-lg ">
+                      <label for="textComment" class="sr-only">Your comment</label>
+                      <textarea id="textComment" name="textComment" rows="6" class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none resize-none" placeholder="Write a comment..." required></textarea>
+                  </div>
+                  <button type="submit" class="transition-all delay-10 inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-[#2E738B] rounded-lg  hover:bg-red-900 hover:text-gray-200">
+                      Post comment
+                  </button>
+              </form>
+              {% endif %}
+
+              
+              {% for comment in comments %}
+
+              
+              <article class="mb-2 p-6 text-base  rounded-lg border-2 shadow-lg bg-gray-300">
+                <footer class="flex justify-between items-center mb-2">
+                  <div class="flex items-center">
+                    <p class="inline-flex items-center mr-3 text-md text-gray-900  font-semibold">
+                    {% if not comment.commenter.image_blob %}
+                    <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="mr-1 bi bi-person-circle w-10 fill-gray-900" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>{{comment.commenter|capfirst}}
+                    {% else %}
+                    <img src="{% url 'serve_image' comment.commenter.id %}" alt="User image" class="w-10 h-10 mr-1 object-cover rounded-full">{{comment.commenter|capfirst}}
+                    {% endif %}
+                    </p>
+                  </div>
+
+                </footer>
+                <p class="text-gray-500 ">{{comment.text | capfirst}}</p>
+                
+              </article>
+              {% endfor %}
+
+
+
+             
+          {% endblock %}

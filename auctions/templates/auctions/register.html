@@ -1,0 +1,59 @@
+{% extends 'auctions/header.html' %}
+
+{% block body %}
+  <div class="my-24">
+    <h2 class="text-2xl font-bold text-center mb-4">Register</h2>
+
+    <style>
+      #image_upload {
+        display: none;
+      }
+    </style>
+
+    {% if message %}
+      <div class="text-1xl font-normal mb-4 text-center text-red-900">{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post" class="max-w-md mx-auto" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-4">
+        <input class="w-full p-2 border border-gray-300 rounded" autofocus type="text" name="username" placeholder="Username" required />
+      </div>
+      <div class="mb-4">
+        <input class="w-full p-2 border border-gray-300 rounded" type="email" name="email" placeholder="Email Address" required />
+      </div>
+      <div class="mb-4">
+        <input class="w-full p-2 border border-gray-300 rounded" type="password" name="password" placeholder="Password" required />
+      </div>
+      <div class="mb-4">
+        <input class="w-full p-2 border border-gray-300 rounded" type="password" name="confirmation" placeholder="Confirm Password" required />
+      </div>
+      <div class="mb-4">
+        <input type="file" id="image_upload" name="image_upload" onchange="previewImage(event)" />
+        <div class="w-full justify-between flex">
+          <label class="text-gray-400">Perfil Image:</label>
+          <label for="image_upload" class="hover:bg-red-500 transition-all delay-10 cursor-pointer bg-blue-500 text-white px-4 py-2 rounded">Upload Image</label>
+        </div>
+        <div class="flex w-full justify-center">
+          <img id="image_preview" class="border border-gray-300 mt-6 w-32 h-32 rounded-full object-cover" />
+        </div>
+        <script>
+          function previewImage(event) {
+            var reader = new FileReader()
+            reader.onload = function () {
+              var output = document.getElementById('image_preview')
+              output.src = reader.result
+            }
+            reader.readAsDataURL(event.target.files[0])
+          }
+        </script>
+      </div>
+
+      <input class="w-full bg-blue-500 text-white p-2 rounded cursor-pointer hover:bg-blue-700 invalid:border-pink-500" type="submit" value="Register" />
+    </form>
+
+    <p class="mt-4 text-center">
+      Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Log In here.</a>
+    </p>
+  </div>
+{% endblock %}

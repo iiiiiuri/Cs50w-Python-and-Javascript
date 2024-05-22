@@ -1,0 +1,17 @@
+{% extends 'auctions/header.html' %}
+
+{% block body %}
+  <h1 class="font-bold text-center text-4xl mt-2 text-gray-900">Categories</h1>
+  <div class="flex flex-wrap gap-5 justify-center mt-10">
+    <div class="w-1/5">
+      <a class="p-4 m-2 bg-[#2E738B] block text-center rounded-md text-lg font-bold hover:bg-red-500 text-white transition-all delay-10" href="{% url 'index' %}">Todos</a>
+    </div>
+    {% for category in categories %}
+      {% if category.category != None %}
+        <div class="w-1/5">
+          <a class="p-4 m-2 bg-[#2E738B] block text-center rounded-md text-lg font-bold hover:bg-red-500 text-white transition-all delay-10" href="{% url 'index' %}?category={{ category.category }}">{{ category.category }}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

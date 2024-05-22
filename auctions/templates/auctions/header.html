@@ -1,0 +1,192 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <title>
+      {% block title %}
+        Auctions
+      {% endblock %}
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+    <link href="{% static 'auctions/styles.css' %}" rel="stylesheet" />
+  </head>
+  <body class="flex flex-col bg-gray-100 p-0 ">
+
+    
+    <div class="flex bg-gradient-to-r from-[#0D0C1D] to-[#161B33] p-2.5 w-full sticky top-0 z-40 shadow-md justify-between">
+      <div class="flex">
+      <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="w-10 mr-2" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="white" stroke="none">
+          <path d="M1992 5104 c-110 -29 -210 -115 -260 -222 -24 -50 -27 -70 -28 -166
+         l-1 -108 -597 -597 -596 -596 -107 0 c-96 0 -114 -3 -165 -27 -67 -31 -147
+         -103 -183 -163 -31 -53 -55 -144 -55 -206 0 -62 32 -164 69 -219 17 -25 236
+         -250 488 -501 498 -496 503 -500 630 -517 140 -18 262 26 356 128 78 84 101
+         146 101 277 l1 102 54 55 55 55 16 -27 c29 -47 109 -110 162 -128 87 -29 205
+         -8 283 50 19 14 63 -34 949 -1052 511 -587 952 -1086 980 -1108 239 -193 577
+         -174 796 46 234 234 240 592 12 829 -37 38 -337 305 -667 592 -1529 1330
+         -1475 1282 -1459 1304 61 85 80 192 50 283 -18 53 -81 133 -128 162 l-27 16
+         55 55 55 54 97 0 c128 0 201 26 283 103 132 122 168 307 93 470 -23 49 -93
+         124 -498 529 -329 329 -485 478 -516 494 -99 49 -199 60 -298 33z m183 -203
+         c27 -13 190 -170 497 -477 437 -440 456 -461 466 -507 31 -152 -99 -276 -249
+         -237 -40 10 -90 57 -497 463 -249 249 -462 469 -473 489 -11 23 -19 57 -19 88
+         0 145 146 241 275 181z m70 -891 l420 -420 -568 -567 -567 -568 -420 420
+         c-231 231 -420 424 -420 430 0 13 1112 1125 1125 1125 6 0 199 -189 430 -420z
+         m-1757 -809 c20 -11 240 -224 489 -473 406 -407 453 -457 463 -497 39 -150
+         -85 -280 -237 -249 -46 10 -67 29 -507 466 -307 307 -464 470 -477 497 -45 96
+         -4 205 96 258 42 23 127 21 173 -2z m2173 -40 c22 -22 29 -39 29 -68 0 -36
+         -12 -50 -313 -350 -300 -301 -314 -313 -350 -313 -56 0 -97 43 -97 102 l0 43
+         308 307 307 308 43 0 c35 0 50 -6 73 -29z m356 -721 c186 -162 461 -402 612
+         -534 l273 -239 -223 -223 c-123 -123 -227 -223 -230 -222 -3 2 -221 251 -484
+         553 -263 303 -503 578 -533 613 l-56 63 145 145 c79 79 147 143 151 142 4 -2
+         159 -136 345 -298z m1118 -975 l70 -64 -245 -245 -245 -245 -64 75 -64 76 234
+         234 c129 129 236 234 239 234 3 -1 37 -30 75 -65z m465 -406 c124 -109 235
+         -213 247 -231 53 -80 68 -128 68 -228 0 -82 -4 -103 -26 -150 -95 -202 -307
+         -296 -509 -225 -77 27 -132 77 -310 282 -95 109 -185 211 -199 226 l-25 28
+         254 254 c140 140 259 251 264 247 6 -3 112 -95 236 -203z" />
+          <path d="M1744 4081 c-72 -53 -442 -435 -449 -464 -19 -76 46 -141 123 -122
+         17 4 110 89 260 238 231 231 232 233 232 276 0 34 -6 49 -29 72 -39 39 -85 39
+         -137 0z" />
+          <path d="M1083 3403 c-35 -7 -73 -59 -73 -100 0 -50 45 -93 97 -93 49 0 78 21
+         93 64 16 49 -7 102 -54 121 -20 8 -37 14 -38 14 -2 -1 -13 -4 -25 -6z" />
+          <path d="M453 1186 c-102 -33 -176 -97 -222 -196 -22 -46 -26 -69 -26 -140 0
+         -75 4 -93 30 -147 l30 -61 -42 -27 c-98 -61 -187 -193 -212 -313 -15 -70 -14
+         -214 1 -247 26 -58 -48 -55 1388 -55 1436 0 1362 -3 1388 55 15 33 16 177 1
+         247 -25 120 -114 252 -212 313 l-42 27 30 61 c26 54 30 72 30 147 0 76 -3 93
+         -33 152 -38 77 -92 130 -171 167 l-56 26 -920 2 c-741 1 -928 -1 -962 -11z
+         m1867 -206 c45 -23 80 -80 80 -131 0 -45 -36 -103 -80 -128 -38 -21 -40 -21
+         -920 -21 -880 0 -882 0 -920 21 -102 57 -104 195 -4 255 l39 24 883 0 c865 0
+         884 0 922 -20z m112 -513 c89 -44 148 -124 164 -225 l7 -42 -1202 0 c-1154 0
+         -1201 1 -1201 18 0 37 31 120 59 159 37 50 81 83 146 105 46 16 119 17 1010
+         15 l960 -2 57 -28z" />
+        </g>
+      </svg>
+      <a href="{% url 'index' %}" class="text-white hover:text-[#26566E] transition-all delay-10 text-bold text-md lg:text-4xl my-auto font-bold">Auctions</a>
+    </div>
+
+      
+
+
+
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+        <div class="lg:hidden">
+          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white font-medium rounded-lg text-sm text-center inline-flex items-center outline-none border-none" type="button">
+            {% if user.is_authenticated %}
+            <div class="flex flex-col items-center w-16 text-center justify-end">
+      
+              {% if user.image_blob == Null %}
+              <svg xmlns="http://www.w3.org/2000/svg"  fill="white" class="bi bi-person-circle w-10" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>
+              {% else %}
+              <div class="w-12 h-12 rounded-full overflow-hidden">
+                <img src="{% url 'serve_image' user_id=user.id %}" alt="User image" class="w-full h-full object-cover">
+              </div>
+              {% endif %}
+                <span class="text-center text-white font-bold">{{user.username.capitalize}}</span>
+            {% endif %} 
+            </button>
+            
+
+            <div id="dropdown" class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 right-3">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                  <li>
+                    <a href="{% url 'index' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Active Auctions</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'categories' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Categories</a>
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li>
+                    <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'create_auction' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Create Auction</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'watch' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Watchlist</a>
+                  </li>
+                  {% else %}
+                  <li>
+                    <a href="{% url 'login' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Login</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'register' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Register</a>
+                  </li>
+                  {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var dropdownButton = document.getElementById('dropdownDefaultButton');
+          var dropdownMenu = document.getElementById('dropdown');
+
+          dropdownButton.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('hidden');
+          });
+        });
+        </script>
+
+        <div class="hidden lg:block justify-end">
+          <ul class="flex p-2 w-full justify-end text-sm lg:text-lg font-bold my-auto">
+            <li class="mr-6">
+              <a href="{% url 'categories' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10">Categories</a>
+            </li>
+              <li class="mr-6">
+                <a href="{% url 'index' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10 text-bold">Active Auctions</a>
+              </li>
+            {% if user.is_authenticated %}
+              <li class="mr-6">
+                <a href="{% url 'logout' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10">Log Out</a>
+              </li>
+              <li class="mr-6">
+                <a href="{% url 'create_auction' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10">Create Auctions</a>
+              </li>
+              <li class="mr-6">
+                <a href="{% url 'watch' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10">Watchlist</a>
+              </li>
+            {% else %}
+              <li class="mr-6">
+                <a href="{% url 'login' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10">Log In</a>
+              </li>
+              <li>
+                <a href="{% url 'register' %}" class="my-auto text-center text-white hover:text-[#26566E] transition-all delay-10">Register</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+
+      {% if user.is_authenticated %}
+      <div class="lg:block hidden lg:flex lg:flex-col lg:items-center lg:w-16 lg:text-center lg:justify-end">
+        {% if user.image_blob == Null %}
+        <svg xmlns="http://www.w3.org/2000/svg"  fill="white" class="bi bi-person-circle w-10" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+        </svg>
+        {% else %}
+        <div class="w-12 h-12 rounded-full overflow-hidden">
+          <img src="{% url 'serve_image' user_id=user.id %}" alt="User image" class="w-full h-full object-cover">
+        </div>
+        {% endif %}
+          <span class="text-center text-white font-bold">{{user.username.capitalize}}</span>
+      {% endif %} 
+
+      
+      </div>
+    </div>
+    <div class="flex-1 mt-2 pb-10">
+      {% block body %}
+
+
+      {% endblock %}
+
+    </div>
+
+
+  </body>
+</html>

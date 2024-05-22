@@ -1,0 +1,83 @@
+{% extends 'auctions/header.html' %}
+
+{% block body %}
+  {% if user.is_authenticated %}
+    <h2 class="text-4xl font-bold mb-4 text-center">Create Your Auction</h2>
+
+    <form method="post" action="{% url 'create_auction' %}" class="max-w-md mx-auto">
+      {% csrf_token %}
+
+      <div class="mb-4">
+        <label for="title" class="text-gray-700">Title:</label>
+        <input class="w-full p-2 border border-gray-300 rounded" type="text" name="title" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="description" class="text-gray-700">Description:</label>
+        <input class="w-full p-2 border border-gray-300 rounded" type="text" name="description" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="starting_price" class="text-gray-700">Starting Price:</label>
+        <input class="w-full p-2 border border-gray-300 rounded" type="text" name="starting_price" pattern="^\d+(,\d{1,2})?$" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="image" class="text-gray-700">Image (URL):</label>
+        <input class="w-full p-2 border border-gray-300 rounded" type="url" name="image" id="image-url" />
+      </div>
+
+      <div class="mb-4">
+        <label for="imageView" class="text-gray-700">Image:</label>
+        <img id="image-preview" class="object-contain w-full h-60" src="" name="imageView" />
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var imageUrlInput = document.getElementById('image-url')
+          var imagePreview = document.getElementById('image-preview')
+        
+          var updateImage = function () {
+            var imageUrl = imageUrlInput.value
+            if (imageUrl === '') {
+              // Se a URL da imagem for vazia, use a imagem padrão
+              imageUrl = 'https://dummyimage.com/600x400/a8a8a8/ffffff&text=No+Have+a+Image'
+            }
+            imagePreview.src = imageUrl
+          }
+        
+          imagePreview.onerror = function () {
+            // Se ocorrer um erro ao carregar a imagem, use uma imagem de erro
+            imagePreview.src = 'https://dummyimage.com/600x400/bf1b29/ffffff&text=Not+Found+Image'
+          }
+        
+          imageUrlInput.addEventListener('input', updateImage)
+        
+          // Atualize a imagem quando a página é carregada
+          updateImage()
+        })
+      </script>
+
+      <div class="mb-4">
+        <label for="category" class="text-gray-700">Category:</label>
+        <input class="w-full p-2 border border-gray-300 rounded" type="text" name="category" />
+      </div>
+
+      <button class="w-full bg-blue-500 text-white p-2 rounded cursor-pointer hover:bg-blue-700" type="submit">Create</button>
+    </form>
+  {% else %}
+    <h2 class="text-4xl font-bold mb-4 text-center mt-20">Create Your Auction</h2>
+    <div class="flex justify-center">
+      <span class="title-font font-medium text-2xl text-gray-900">
+        <a class="text-indigo-800 hover:text-red-500" href="{% url 'register' %}">Create your account</a>or
+        <a class="text-indigo-800 hover:text-red-500" href="{% url 'login' %}">login</a>to create an Auction!
+      </span>
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-box-arrow-in-right w-10 fill-gray-900" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+          <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+        </svg>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
