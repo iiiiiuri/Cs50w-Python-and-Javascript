@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Advanced Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        display: flex;
+        margin: auto;
+        justify-content: end;
+        padding: 1vw;
+      }
+
+      header a {
+        margin-left: 1vw;
+        margin-right: 1vw;
+        color: rgb(85, 85, 85);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: rgb(51, 51, 255);
+      }
+
+      .search-advanced {
+        width: 600px;
+        margin: 0 auto;
+        text-align: left;
+      }
+
+      .search-advanced label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .search-advanced input {
+        width: 300px;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .search-advanced button {
+        background-color: #4285f4;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+
+      .flex-label {
+        display: flex;
+      }
+
+      label {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        width: 300px;
+      }
+
+      input[type="text"] {
+        margin-bottom: 10px;
+        height: 30px;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">Return</a>
+    </header>
+
+    <div class="search-advanced">
+      <div id="container-logo">
+        <img id="" src="img/google-logo.png" />
+      </div>
+
+      <h1>Google Advanced Search</h1>
+      <form action="https://www.google.com/search" method="GET">
+        <div class="flex-label">
+          <label for="all-words">Find pages with… "all these words:"</label>
+          <input type="text" name="as_q" id="all-words" />
+        </div>
+
+        <div class="flex-label">
+          <label for="exact-phrase"
+            >Find pages with… "this exact word or phrase:"</label
+          >
+          <input type="text" name="as_epq" id="exact-phrase" />
+        </div>
+
+        <div class="flex-label">
+          <label for="any-words">Find pages with… "any of these words:"</label>
+          <input type="text" name="as_oq" id="any-words" />
+        </div>
+        <div class="flex-label">
+          <label for="no-words">Find pages with… "none of these words:"</label>
+          <input type="text" name="as_eq" id="no-words" />
+        </div>
+        <button type="submit">Advanced Search</button>
+      </form>
+    </div>
+  </body>
+</html>

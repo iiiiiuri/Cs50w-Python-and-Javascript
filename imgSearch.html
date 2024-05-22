@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        display: flex;
+        margin: auto;
+        justify-content: end;
+        padding: 1vw;
+      }
+
+      header a {
+        margin-left: 1vw;
+        margin-right: 1vw;
+        color: rgb(85, 85, 85);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: rgb(51, 51, 255);
+      }
+
+      #mainSection {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+      }
+
+      #container-input-form,
+      #container-submit-form {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+      }
+
+      #search-input {
+        width: 30vw;
+        height: 5vh;
+        border-radius: 2vw;
+        outline: none;
+        border: none;
+        border: 1px solid #acacac;
+        font-size: 1vw;
+        padding-left: 1vw;
+      }
+
+      #submit-input {
+        background-color: #f8f9fa;
+        border: 1px solid #f8f9fa;
+        border-radius: 4px;
+        color: #3c4043;
+        font-family: arial, sans-serif;
+        font-size: 14px;
+        margin: 11px 4px;
+        padding: 0 16px;
+        line-height: 27px;
+        height: 36px;
+        min-width: 54px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      #submit-input:hover {
+        border: 1px solid rgb(165, 165, 165);
+      }
+
+      #container-form {
+        display: inline;
+      }
+
+      #container-logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER FROM PAGE -->
+    <header>
+      <a href="index.html">Return</a>
+    </header>
+
+    <section id="mainSection">
+      <div id="container-form">
+        <!-- LOGO GOOGLE -->
+        <div id="container-logo">
+          <img id="" src="img/google-images-logo.png" />
+        </div>
+
+        <!-- FORM -->
+        <form action="https://www.google.com/search" method="GET">
+          <div id="container-input-form">
+            <input id="search-input" type="text" name="q" />
+            <input type="hidden" name="tbm" value="isch" />
+          </div>
+          <div id="container-submit-form">
+            <input id="submit-input" type="submit" value="Search Images" />
+          </div>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
