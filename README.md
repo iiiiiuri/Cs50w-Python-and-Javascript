@@ -1,6 +1,6 @@
 # 📚 Project 1 : Backend Django - Enciclopédia Online
 
-<img src="markdown/wikipedia.jpg" width="100%">
+<img src="markdown/wikipedia.png" width="100%">
 
 ## 📝 Descrição
 
