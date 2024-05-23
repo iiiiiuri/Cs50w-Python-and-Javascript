@@ -1,4 +1,4 @@
-# 🏗️ Projeto 2 : Site de Leilões
+# 🏗️ Project 2 : Models and Migrations - Site de Leilões
 <img src="markdown/commerce.png" width="100%">
 
 ## 📝 Descrição
