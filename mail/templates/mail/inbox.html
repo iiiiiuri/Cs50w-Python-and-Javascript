@@ -1,0 +1,87 @@
+{% extends "mail/layout.html" %} {% load static %} {% block body %}
+<div class="ml-2">
+  <button
+    class="rounded-md p-2 bg-emerald-900 hover:bg-emerald-200 text-emerald-200 hover:text-gray-900 transition-all delay-0 font-semibold"
+    id="inbox"
+  >
+    Inbox
+  </button>
+  <button
+    class="rounded-md p-2 bg-emerald-900 hover:bg-emerald-200 text-emerald-200 hover:text-gray-900 transition-all delay-0 font-semibold"
+    id="compose"
+  >
+    Compose
+  </button>
+  <button
+    class="rounded-md p-2 bg-emerald-900 hover:bg-emerald-200 text-emerald-200 hover:text-gray-900 transition-all delay-0 font-semibold"
+    id="sent"
+  >
+    Sent
+  </button>
+  <button
+    class="rounded-md p-2 bg-emerald-900 hover:bg-emerald-200 text-emerald-200 hover:text-gray-900 transition-all delay-0 font-semibold"
+    id="archived"
+  >
+    Archived
+  </button>
+</div>
+
+<div class="ml-2" id="emails-view"></div>
+
+<div
+  id="compose-view"
+  class="w-full max-w-lg mx-auto mt-5 bg-gray-900 shadow-2xl p-2 rounded-md bg-opacity-60 border-2 border-emerald-200"
+>
+  <h3 class="text-2xl font-bold mb-5 text-emerald-200">New Email</h3>
+  <form id="compose-form">
+    <div class="mb-4">
+      <label class="block text-emerald-200 text-sm font-bold mb-2" for="from"
+        >From:</label
+      >
+      <input
+        disabled
+        id="from"
+        class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        value="{{ request.user.email }}"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-emerald-200 text-sm font-bold mb-2" for="to"
+        >To:</label
+      >
+      <input
+        id="compose-recipients"
+        class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-emerald-200 text-sm font-bold mb-2" for="subject"
+        >Subject:</label
+      >
+      <input
+        id="compose-subject"
+        class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Subject"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-emerald-200 text-sm font-bold mb-2" for="body"
+        >Body:</label
+      >
+      <textarea
+        id="compose-body"
+        class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Body"
+      ></textarea>
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        class="rounded-md p-2 hover:bg-emerald-900 bg-emerald-200 hover:text-emerald-200 text-gray-900 transition-all delay-0 font-semibold"
+        type="submit"
+      >
+        Send
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
