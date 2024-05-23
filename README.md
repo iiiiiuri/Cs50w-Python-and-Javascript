@@ -67,10 +67,6 @@ O CSS utilizado no projeto busca imitar a estética do Google, com campos de ent
 - A funcionalidade "I'm Feeling Lucky" pode apresentar um aviso de redirecionamento devido a uma característica de segurança do Google.
 - Este projeto é uma simulação de interface e utiliza os servidores do Google para exibir os resultados de busca.
 
-## 👨‍💻 Autor
-
-Este projeto foi desenvolvido como parte de um exercício prático para o curso CS50W da Universidade de Harvard.
-
 # License 📜
 
 This project is licensed under the MIT License. See the [LICENSE](https://opensource.org/license/mit) file for more information.
