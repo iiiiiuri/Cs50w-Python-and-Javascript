@@ -1,0 +1,257 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% load post_tags %}
+{% block body %}
+
+<div class="h-full flex flex-col md:flex-row">
+
+
+<div class="w-full md:w-1/6 bg-gray-700 mx-1 rounded-lg md:h-full bg-opacity-50 flex flex-col items-center">
+    {% if user.is_authenticated %}
+    <div style="background-image: url({{user.background_picture.url}}); background-size: cover; background-position: center; background-repeat: no-repeat;"  class=" w-full flex flex-col items-center justify-center rounded-md">
+        <div class="w-24 h-24 bg-indigo-100 mx-auto rounded-full shadow-2xl">
+            <img class="rounded-full w-24 h-24 object-cover" src="{{ request.user.profile_picture.url }}" alt="">
+        </div>
+        <div class="mt-1 bg-gray-200 rounded-b-md w-full flex items-center justify-center bg-opacity-40">
+            <a href="{% url 'profile' user.username %}" class="text-center font-bold text-white text-2xl" href="">{{ user.first_name | capfirst}} {{ user.last_name | capfirst}}, 
+                <span class="text-sm text-gray-300">@{{user.username}}</span></a>
+        </div>
+    </div>
+
+    {% else %}
+        <div class="w-full mb-4 flex justify-center">
+            <img class="w-46" src="{% static 'img/logo.svg'%}" alt="">
+        </div>
+    {% endif %}
+
+    <div class="w-full p-4">
+        <h3 class="font-bold text-white text-2xl mb-2">Home</h3>
+        <ul class="list-none">
+
+            <div class="flex cursor-pointer">
+                <a href="{%url 'index'%}" class="mx-2 font-montserrat text-lg hover:font-bold text-white">
+                    All Posts
+                </a>
+                <i class="my-auto text-lg text-white font-montserrat hover:font-bold bi bi-person-fill"></i>
+            </div>
+
+            {% if user.is_authenticated %}
+
+            <div class="flex cursor-pointer">
+                <a href="{% url 'profile' user.username %}" class="mx-2 font-montserrat text-lg hover:font-bold text-white">
+                    Profile
+                </a>
+                <i class="my-auto text-lg text-white font-montserrat hover:font-bold bi bi-stickies"></i>
+            </div>
+
+            <div class="flex cursor-pointer">
+                <a href="{% url 'following'%}" class="mx-2 font-montserrat text-lg hover:font-bold text-white">
+                    Following
+                </a>
+                <i class="my-auto text-lg text-white font-montserrat hover:font-bold bi bi-person-check-fill"></i>
+            </div>
+
+            <div class="flex cursor-pointer">
+                <a href="{% url 'logout' %}" class="mx-2 font-montserrat text-lg hover:font-bold text-white">
+                    Log Out
+                </a>
+                <i class="my-auto text-lg text-white font-montserrat hover:font-bold bi bi-box-arrow-right"></i>
+            </div>
+
+            {% else %}
+            <div class="flex cursor-pointer">
+                <a href="{% url 'login' %}" class="mx-2 font-montserrat text-lg hover:font-bold text-white">
+                    Log In
+                </a>
+                <i class="my-auto text-lg text-white font-montserrat hover:font-bold bi bi-box-arrow-in-right"></i>
+            </div>
+
+            <div class="flex cursor-pointer">
+                <a href="{% url 'register' %}" class="mx-2 font-montserrat text-lg hover:font-bold text-white">
+                    Register
+                </a>
+                <i class="my-auto text-lg text-white font-montserrat hover:font-bold bi bi-person-plus-fill"></i>
+            </div>
+
+            {% endif %}
+
+        </ul>
+    </div>
+</div>
+
+
+
+<div class="bg-gray-700 bg-opacity-50 rounded-md h-full w-full overflow-auto space-y-4 mt-4 md:mt-0 md:w-4/5">
+
+    {% block profile %}
+    
+    {% endblock profile %}
+
+    <div class="bg-gray-950 p-2 rounded-t-md bg-opacity-65">
+        <h1 class="text-white font-bold text-2xl text-center">All Posts</h1>
+    </div>
+
+{% if user.is_authenticated %}
+    <div class="mx-2">
+        <form id="compose_post">
+            <div class="w-full mb-2 border rounded-lg bg-gray-900 border-gray-600">
+                <div class="flex items-center justify-between px-3 py-2 border-b border-gray-600">
+                    <div class="file-upload p-2 rounded cursor-pointer text-gray-400 hover:text-white hover:bg-gray-600 focus:outline-none">
+                        <button type="button" class="upload-button">
+                            <i class="bi bi-file-earmark-image"></i>
+                        </button>
+                        <input accept="image/*" type="file" class="file-input hidden">
+                        <span class="file-name">No file chosen</span>
+                        <img class="file-preview hidden" width="50" height="50">
+                    </div>
+                    <button type="button" class="remove-button hidden bg-red-500 p-2 rounded-md text-white">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+                <div class="px-4 py-2 rounded-b-lg bg-gray-800">
+                    <textarea id="editor" rows="8" class="resize-none block w-full px-0 text-sm border-0 bg-gray-800 focus:ring-0 text-white placeholder-gray-400 focus:outline-none" placeholder="Digite seu post aqui..." required res></textarea>
+                    <div class="flex justify-end">
+                        <button type="submit" class="p-2 bg-gray-900 hover:bg-gray-700 text-white delay-75 transition-all rounded-md font-montserrat">
+                            Publish post
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+    </script>
+{% endif %}
+
+{% if posts %}
+    {% for post in posts %}
+
+    <div class="bg-gray-900 rounded-md shadow-2xl mx-1">
+        
+        <div class="flex justify-between items-center bg-gray-950 p-2 rounded-t-md bg-opacity-40">
+            <div class="flex items-center">
+                <img class="rounded-full w-10 h-10 bg-indigo-50" src="{{post.owner.profile_picture.url}}" alt="">
+                <a href="{%url 'profile' post.owner.username %}" class="text-white font-bold font-montserrat my-auto ml-2">{{ post.owner.first_name | capfirst}} {{ post.owner.last_name | capfirst}}</a>
+            </div>
+            <div class="text-right">
+                <span class="text-sm text-white font-montserrat">{{post.timestamp}}</span>
+            </div>
+            {% if request.user == post.owner %}
+
+            <div class="text-right">
+                <div class="relative inline-block text-left">
+                    <button class="hover:-translate-y-0.5 transform transition delay-75 dropdownMenuIconHorizontalButton inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-blue-950 text-sm font-medium text-white hover:bg-gray-800" aria-haspopup="true" aria-expanded="true">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+        
+                    <div class="dropdownDotsHorizontal origin-top-right absolute right-0 mt-2 w-20 rounded-md shadow-lg bg-gray-950 ring-1 ring-black ring-opacity-5 hidden">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <a class="delete_post block px-2 py-2.5 text-sm text-white hover:bg-red-800 hover:text-white" href="#" data-id="{{ post.id }}" role="menuitem">Delete</a>
+                            <a class="edit_post block px-2 py-2.5 text-sm text-white hover:bg-blue-800 hover:text-white" href="#" data-id="{{ post.id }}" role="menuitem">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div id="edit-modal" class=" hidden fixed z-10 inset-0 overflow-y-auto flex items-center justify-center" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <!-- Overlay -->
+                <div class="fixed inset-0 bg-black opacity-50"></div>
+
+                
+
+                <div class="bg-gray-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:w-full md:max-w-lg">
+                    <h1 class="font-montserrat text-2xl ml-2 text-white">Edit Post</h1> 
+                    <form id="edit-form" method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="p-4">
+                            <textarea name="content" class="resize-none w-full px-3 py-2 text-white border rounded-lg focus:outline-none bg-gray-800" rows="4">{{ post.content }}</textarea>
+
+                            <div class="file-upload mt-2 p-2 rounded cursor-pointer text-gray-700 hover:text-white hover:bg-gray-600 focus:outline-none">
+                                <i class="bi bi-file-earmark-image"></i>
+                                <input accept="image/*" type="file" id="image" name="image" class="file-input hidden mt-1 block w-full">
+                                <span class="file-name">No file chosen</span>
+                                <img class="file-preview hidden" width="50" height="50">
+                            </div>
+
+                            
+                            <div class="mt-4 flex justify-end">
+                                <button id="cancel-button" type="button" class="mr-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 hover:-translate-y-0.5 transition">Cancel</button>
+                                <button id="save-button" type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 hover:-translate-y-0.5 transition">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="p-2 w-full">
+            <textarea id="dynamicTextarea" class="font-montserrat resize-none bg-gray-900 block w-full px-0 text-lg border-0 focus:ring-0 text-white" readonly disabled>{{post.content}}</textarea>
+
+            <script>
+                window.onload = function() {
+                    var textarea = document.getElementById('dynamicTextarea');
+                    textarea.rows = textarea.value.split('\n').length;
+                };
+            </script>       
+            
+            
+            {% if post.image %}
+                <img class="rounded-md w-2/5 mx-auto my-2" src="{{post.image.url}}" alt="">
+            {% endif %}
+            <div class="flex justify-end mt-2 space-x-2">
+                <div class="flex items-center justify-start ml-auto">
+                    <i class="bi bi-hand-thumbs-up-fill text-white"></i>
+                    <p id="like-count-{{ post.id }}" class="ml-1 text-white">{{ post.likes.count }}</p>
+                </div>
+                {% if user.is_authenticated %}
+                <div class=" flex space-x-2">
+                    <div class="like-div bg-blue-900 p-2 rounded-md hover:bg-blue-800 delay-75 transition-all cursor-pointer select-none hover:-translate-y-0.5" data-id="{{ post.id }}">
+                        <i class="cursor-pointer bi {% if post|is_liked_by_user:user %}bi-heart-fill{% else %}bi-heart{% endif %} text-white text-lg" id="like-icon-{{ post.id }}"></i>
+                        <span class="select-none text-white font-montserrat" id="like-text-{{ post.id }}">{% if post|is_liked_by_user:user %}Unlike{% else %}Like{% endif %}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div> 
+
+
+
+    {% endfor %}
+
+    <div class="justify-center flex">
+
+    {% if posts.has_previous %}
+        <a class="px-2 py-0.5 rounded-md mx-2 bg-blue-800 hover:-translate-y-0.5 transition hover:bg-blue-700 text-white" href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% endif %}
+            <span class="text-white bg-blue-400 px-2 rounded-md">{{ posts.number }} </span>
+                    <span class="text-white font-montserrat mx-2">of</span>
+            <span class="text-white bg-blue-400 px-2 rounded-md">{{ posts.paginator.num_pages }}</span>
+    {% if posts.has_next %}
+        <a class="px-2 py-0.5 rounded-md mx-2 bg-blue-800 hover:-translate-y-0.5 transition hover:bg-blue-700 text-white" href="?page={{ posts.next_page_number }}">Next</a>
+    {% endif %}
+
+    </div>
+
+
+
+
+
+
+{% else %}
+    <div class="bg-gray-900 rounded-md shadow-2xl mx-1">
+        <div class="p-2 w-full">
+            <p class="text-white">No posts yet.</p>
+        </div>
+    
+
+{% endif %}
+
+
+
+
+
+{% endblock %}

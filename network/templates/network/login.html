@@ -1,0 +1,28 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div class="bg-red-500 text-white p-3 rounded">{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post" class="space-y-24">
+        {% csrf_token %}
+
+        <div class="flex flex-col items-center justify-center">
+            <div class="w-3/12 p-4 bg-gray-900 bg-opacity-55 rounded shadow border-2 ">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">Login</h2>
+
+                <input class="p-2 w-full border rounded" type="text" name="username" placeholder="Username">
+
+                <input class="p-2 w-full border rounded mt-2" type="password" name="password" placeholder="Password">
+
+                <input class="py-2 px-4 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 mt-2 w-full" type="submit" value="Login">
+
+                <p class="mt-4 text-center text-white">Don't have an account? <a href="{% url 'register' %}" class="text-blue-500 hover:underline">Register here.</a></p>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}

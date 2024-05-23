@@ -1,0 +1,36 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div class="bg-red-500 text-white p-3 rounded">{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post" class="space-y-24">
+        {% csrf_token %}
+
+        <div class="flex flex-col items-center justify-center">
+            <div class="w-3/12 p-4 bg-gray-900 bg-opacity-55 rounded shadow border-2 ">
+                <h2 class="text-2xl font-bold text-white mb-6 text-center">Register</h2>
+
+                <input required class="p-2 w-full border rounded" autofocus type="text" name="first_name" placeholder="First Name">
+
+                <input required class="p-2 w-full border rounded mt-2" type="text" name="last_name" placeholder="Last Name">
+
+                <input required class="p-2 w-full border rounded mt-2" type="text" name="username" placeholder="Username">
+
+                <input required class="p-2 w-full border rounded mt-2" type="email" name="email" placeholder="Email Address">
+
+                <input required class="p-2 w-full border rounded mt-2" type="password" name="password" placeholder="Password">
+
+                <input required class="p-2 w-full border rounded mt-2" type="password" name="confirmation" placeholder="Confirm Password">
+
+                <input required class="py-2 px-4 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 mt-2 w-full" type="submit" value="Register">
+
+                <p class="mt-4 text-center text-white">Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Log In here.</a></p>
+            </div>
+        </div>
+
+    </form>
+
+{% endblock %}
