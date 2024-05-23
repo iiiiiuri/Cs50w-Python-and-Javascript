@@ -1,4 +1,4 @@
-# 📱 Project 4 : Django + JavaScript - Social Network
+# 📱 Project 4 : User Interfaces - Social Network
 <img src="markdown/profiles.png" width="100%" >
 
 ## 📝 Descrição
