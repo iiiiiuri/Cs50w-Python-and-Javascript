@@ -33,22 +33,22 @@ O projeto utiliza um modelo de dados para representar emails, incluindo informa�
 git clone <url_do_repositorio>
 ```
 ### 2️⃣ Instale Dependências
-```sh
+```bash
 pip install -r requirements.txt
 ```
 
 ### 3️⃣ Configure o Banco de Dados
-```sh
+```bash
 python manage.py makemigrations mail
 python manage.py migrate
 ```
 ### 4️⃣ Crie um Superusuário
-```sh
+```bash
 python manage.py createsuperuser
 ```
 
 ### 5️⃣ Inicie o Servidor Django
-```sh
+```bash
 python manage.py runserver
 ```
 
