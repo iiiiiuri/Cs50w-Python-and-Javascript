@@ -84,9 +84,6 @@ Siga os passos abaixo para configurar e executar o projeto:
 - Django 3.x
 - markdown2
 
-## 👨‍💻 Autor
-Este projeto foi desenvolvido como parte de um exercício prático para o curso CS50W da Universidade de Harvard.
-
 # Licença 📜
 
 This project is licensed under the MIT License. See the [LICENSE](https://opensource.org/license/mit) file for more information.
