@@ -55,6 +55,13 @@ Fornecer habilidades que são diretamente aplicáveis no mercado de trabalho, ta
 | Final Project | ![Capstone](https://img.shields.io/badge/Capstone-FF1B2D?style=for-the-badge&logo=&logoColor=white) | [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/7nS3Tf3hp5Q) | [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iiiiiuri/Cs50w-Python-and-Javascript/tree/Capstone) |
 
 
+## Certificação 📜
+
+[![Link da Certificação](https://img.shields.io/badge/Verificar_Certificado-66C3FF?style=for-the-badge&logo=&logoColor=white)](https://certificates.cs50.io/09c1c12f-2c37-4d93-a8d9-52b3a1a88816)
+
+<img src="img/CS50W.png" width="100%">
+
+
 
 # License 📜
 
